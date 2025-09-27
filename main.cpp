@@ -1,44 +1,34 @@
+
+
 #include "raylib.h"
 
-//------------------------------------------------------------------------------------
-// Program main entry point
-//------------------------------------------------------------------------------------
 int main(void)
 {
-    // Initialization
-    //--------------------------------------------------------------------------------------
     const int screenWidth = 800;
     const int screenHeight = 450;
 
+    Camera3D cam = { 0 };
+    cam.fovy = 45.0f;
+    cam.position = Vector3{0.0f, 0.0f, 0.0f};
+    cam.target = Vector3{0.0f, 1.0f, 0.0f};
+    cam.projection = CAMERA_FREE;
+
     InitWindow(screenWidth, screenHeight, "raylib [core] example - basic window");
-
-    SetTargetFPS(60);               // Set our game to run at 60 frames-per-second
-    //--------------------------------------------------------------------------------------
-
-    // Main game loop
-    while (!WindowShouldClose())    // Detect window close button or ESC key
+    SetTargetFPS(60); 
+    while (!WindowShouldClose())   
     {
-        // Update
-        //----------------------------------------------------------------------------------
-        // TODO: Update your variables here
-        //----------------------------------------------------------------------------------
-
-        // Draw
-        //----------------------------------------------------------------------------------
         BeginDrawing();
+        ClearBackground(RAYWHITE);
 
-            ClearBackground(RAYWHITE);
+            BeginMode3D(cam);
+            DrawCube({0.0f, 0.0f, 0.0f}, 1,1,1,GREEN);
+            EndMode3D();
 
-            DrawText("Congrats! You created your first window!", 190, 200, 20, LIGHTGRAY);
-
+        DrawFPS(20,20);
         EndDrawing();
-        //----------------------------------------------------------------------------------
+       
     }
-
-    // De-Initialization
-    //--------------------------------------------------------------------------------------
-    CloseWindow();        // Close window and OpenGL context
-    //--------------------------------------------------------------------------------------
+    CloseWindow(); 
 
     return 0;
 }

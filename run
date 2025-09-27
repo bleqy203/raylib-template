@@ -1,5 +1,5 @@
-gcc main.cpp -lraylib
-./a.out
+g++ -o main.out main.cpp -lraylib
+./main.out
 
 # source run
 # ./run &
